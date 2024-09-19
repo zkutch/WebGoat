@@ -22,6 +22,7 @@
 
 package org.owasp.webgoat.lessons.vulnerablecomponents;
 
+import io.github.pixee.security.xstream.HardeningConverter;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -49,6 +50,7 @@ public class VulnerableComponentsLessonTest {
   @Test
   public void testTransformation() throws Exception {
     XStream xstream = new XStream();
+    xstream.registerConverter(new HardeningConverter());
     xstream.setClassLoader(Contact.class.getClassLoader());
     xstream.alias("contact", ContactImpl.class);
     xstream.ignoreUnknownElements();
@@ -59,6 +61,7 @@ public class VulnerableComponentsLessonTest {
   @Disabled
   public void testIllegalTransformation() throws Exception {
     XStream xstream = new XStream();
+    xstream.registerConverter(new HardeningConverter());
     xstream.setClassLoader(Contact.class.getClassLoader());
     xstream.alias("contact", ContactImpl.class);
     xstream.ignoreUnknownElements();
@@ -72,6 +75,7 @@ public class VulnerableComponentsLessonTest {
   @Test
   public void testIllegalPayload() throws Exception {
     XStream xstream = new XStream();
+    xstream.registerConverter(new HardeningConverter());
     xstream.setClassLoader(Contact.class.getClassLoader());
     xstream.alias("contact", ContactImpl.class);
     xstream.ignoreUnknownElements();
